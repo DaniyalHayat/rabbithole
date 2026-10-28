@@ -1,0 +1,53 @@
+{
+  "dataset": "BEIR SciFact",
+  "documents": 5183,
+  "train_queries": 809,
+  "test_queries": 300,
+  "latent_dimensions": 48,
+  "selection": "Fusion weight chosen only on official train judgments; fixed corpus used for unsupervised LSA. No graph reranking in this benchmark.",
+  "selected_weight": 0.15,
+  "development": [
+    {
+      "weight": 0.0,
+      "ndcg10": 0.6766445605974488
+    },
+    {
+      "weight": 0.1,
+      "ndcg10": 0.6784376989429199
+    },
+    {
+      "weight": 0.15,
+      "ndcg10": 0.6793620770268907
+    },
+    {
+      "weight": 0.25,
+      "ndcg10": 0.678344868979636
+    },
+    {
+      "weight": 0.4,
+      "ndcg10": 0.6719036316268342
+    }
+  ],
+  "baseline": {
+    "ndcg10": 0.6659519658317247,
+    "recall10": 0.7824444444444445,
+    "mrr10": 0.6337328042328042
+  },
+  "selected": {
+    "ndcg10": 0.6714133416551026,
+    "recall10": 0.7874444444444445,
+    "mrr10": 0.6391269841269841
+  },
+  "ndcg10_difference": 0.0054613758233779995,
+  "paired_bootstrap_95_ci": [
+    -0.0012856219322211497,
+    0.012411101936884656
+  ],
+  "bootstrap_resamples": 5000,
+  "seed": 42,
+  "latency_ms": {
+    "median": 16.24825003091246,
+    "p95": 29.91656498634257
+  },
+  "scope": "Biomedical abstract retrieval is an external engineering benchmark. These scores do not establish relevance on the curiosity corpus, factual accuracy, or user learning outcomes."
+}

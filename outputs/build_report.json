@@ -1,0 +1,27 @@
+{
+  "papers": 1598,
+  "source_rows": 1600,
+  "duplicates_merged": 2,
+  "citation_edges": 2437,
+  "topics": 518,
+  "abstracts": 1297,
+  "open_access": 1072,
+  "retracted": 2,
+  "quarantined": 0,
+  "components": 744,
+  "largest_component": 749,
+  "themes": {
+    "creativity": 200,
+    "music": 200,
+    "attention": 200,
+    "perception": 200,
+    "dreams": 200,
+    "awe": 200,
+    "connection": 199,
+    "habits": 200
+  },
+  "snapshot": "2026-10-27T23:29:37.277702+00:00",
+  "build_seconds": 0.818,
+  "countries": 77,
+  "papers_with_country": 1207
+}

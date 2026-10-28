@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+!.env.example
+data/raw/*
+!data/raw/manifest.json
+!data/raw/benchmark_manifest.json
+data/processed/*.sqlite
+data/processed/*.npz
+outputs/*.npz
+outputs/*.prof
+.pytest_cache/
+tmp/

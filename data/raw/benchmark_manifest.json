@@ -1,0 +1,6 @@
+{
+  "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+  "sha256": "536e14446a0ba56ed1398ab1055f39fe852686ecad24a6306c80c490fa8e0165",
+  "retrieved_at": "2026-10-27T23:29:37.443032+00:00",
+  "source": "BEIR SciFact; AllenAI SciFact / S2ORC. See docs/SOURCES.md for separate data licenses."
+}
