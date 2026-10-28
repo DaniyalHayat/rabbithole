@@ -47,4 +47,8 @@ The repository was pushed to [GitHub](https://github.com/DaniyalHayat/rabbithole
 
 The final source was imported into [Figma Make](https://www.figma.com/make/AJhaZiufnubi0QBAiJPasT). I opened the Figma-hosted runtime directly and verified the working app, switched the ML mode, opened the atlas, and filtered it to music. `docs/figma-preview.png` captures that running preview. Figma's sharing dialog confirmed **Anyone can view**. The editor showed an intermittent M8 loading error in its AI chat area; the separate hosted preview worked.
 
-The file and runtime preview are available; a separate production `figma.site` publication was not completed. The publishing dialog introduces Figma's Beta Terms, so I left that optional action unsubmitted. There is no claim of production adoption, improved learning, or a statistically significant retrieval improvement.
+The app is now published at [its existing Figma site](https://rabbit-hole-daniyalh-35298519.figma.site/). I updated that same destination after the initial publication. There is no claim of production adoption, improved learning, or a statistically significant retrieval improvement.
+
+## Connected reading paths
+
+I verified the updated Follow the thread interaction in the existing Make file and published app. It retains the original question, reveals attributed source-abstract excerpts, and offers related branches within that question's matching papers. Repeated clicks on the earworm example advance from involuntary musical imagery to related earworm research; Previous step and Back to the original retain the question. No URL changes are needed. JavaScript syntax and the 24 existing browser-engine checks passed. `docs/thread-following.png` captures the published interaction.
