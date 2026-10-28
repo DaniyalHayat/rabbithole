@@ -8,7 +8,7 @@ I wanted a way to follow those questions through real research, see how papers c
 
 [**Open the interactive Figma app**](https://www.figma.com/make/AJhaZiufnubi0QBAiJPasT) · [My demo walkthrough](docs/DEMO.md) · [Methods and limitations](docs/METHODOLOGY.md)
 
-![RabbitHole research discovery app](docs/desktop.png)
+![RabbitHole running in Figma](docs/figma-preview.png)
 
 ## What I built
 
