@@ -98,6 +98,9 @@
     compare: [],
     zoom: 1,
     pan: [0, 0],
+    origin: "",
+    path: [],
+    following: false,
   };
   let toastTimer;
   function toast(message) {
@@ -156,8 +159,11 @@
   }
   function search() {
     state.query = $("#query").value.trim();
+    if (state.query !== state.origin) state.following = false;
+    state.origin = state.query;
     state.results = engine.search(state.query, options());
     state.selected = state.results[0]?.p.id || null;
+    state.path = state.selected ? [state.selected] : [];
     state.zoom = 1;
     state.pan = [0, 0];
     $("#result-summary").textContent = state.results.length
@@ -168,16 +174,68 @@
     renderGraph();
     renderList();
     renderPaper();
+    renderThread();
   }
-  function choose(id) {
+  function choose(id, record = true) {
     if (!engine.ids.has(id)) return;
     state.selected = id;
+    if (record && state.path.at(-1) !== id) {
+      state.path.push(id);
+      state.following = true;
+    }
     const p = D.papers[engine.ids.get(id)];
     if (!state.results.some((r) => r.p.id === id))
       state.results.unshift({ i: engine.ids.get(id), p, score: 0 });
     renderPaper();
     renderGraph();
     renderList();
+    renderThread();
+  }
+  function connectedPapers(p, limit = 3) {
+    if (!p) return [];
+    // A branch must also match the original question, so a citation hop cannot
+    // silently turn an earworm question into an unrelated research theme.
+    const matches = new Map(state.results.map((r, i) => [r.p.id, i]));
+    const visited = new Set(state.path);
+    return engine.related(p.id, D.papers.length)
+      .filter((r) => matches.has(r.p.id) && !visited.has(r.p.id))
+      .sort((a, b) => {
+        const directA = a.kind === "similarity" ? 0 : 1;
+        const directB = b.kind === "similarity" ? 0 : 1;
+        return directB - directA || Number(!!b.p.abstract) - Number(!!a.p.abstract) || matches.get(a.p.id) - matches.get(b.p.id);
+      }).slice(0, limit);
+  }
+  function connectionLabel(kind) {
+    return { cites: "A source cited by this paper", "cited by": "Research that cites this paper", "shared topic": "Another angle on a shared research topic", similarity: "A related idea in the text" }[kind];
+  }
+  function renderThread() {
+    const p = D.papers[engine.ids.get(state.selected)];
+    const related = connectedPapers(p);
+    const context = $("#thread-context");
+    context.classList.toggle("hidden", !p || !state.following);
+    if (p && state.following) {
+      const previous = state.path.length > 1 ? state.path[state.path.length - 2] : null;
+      const relation = previous ? engine.related(previous, D.papers.length).find((r) => r.p.id === p.id) : null;
+      const terms = RH.tokenize(RH.expand(state.origin));
+      const sentences = (p.abstract || "").match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g) || [];
+      const scored = sentences.map((text, index) => ({ text: text.trim(), index, score: terms.filter((t) => text.toLowerCase().includes(t)).length }));
+      scored.sort((a, b) => b.score - a.score || a.index - b.index);
+      const excerpt = scored.slice(0, 2).sort((a, b) => a.index - b.index).map((x) => x.text).join(" ");
+      context.innerHTML = `<div class="thread-top"><p class="eyebrow">YOUR ORIGINAL QUESTION</p><span>Step ${state.path.length}</span></div><h2>${esc(state.origin || "Explore connected research")}</h2><nav class="thread-history" aria-label="Reading path">${state.path.map((id, index) => `<button data-step="${index}" ${index === state.path.length - 1 ? 'aria-current="step"' : ""}>${index + 1}. ${esc(D.papers[engine.ids.get(id)].title.slice(0, 54))}${D.papers[engine.ids.get(id)].title.length > 54 ? "…" : ""}</button>`).join('<span aria-hidden="true">→</span>')}</nav><p class="thread-connection">${esc(relation ? connectionLabel(relation.kind) + ". Still connected to your original question." : "Start with the research behind your question.")}</p><h3>${esc(p.title)}</h3><p class="eyebrow thread-source-label">IN THE RESEARCHER’S WORDS · SOURCE ABSTRACT EXCERPT</p><blockquote>${esc(excerpt || "This record has no source abstract. Open the original paper to explore this angle.")}</blockquote><a class="paper-link" target="_blank" rel="noopener" href="${esc(source(p))}">Read the full source ↗</a><div class="thread-actions"><button id="thread-back" ${state.path.length < 2 ? "disabled" : ""}>← Previous step</button><button id="thread-root" ${state.path.length < 2 ? "disabled" : ""}>Back to the original</button><button id="thread-deeper" ${!related.length ? "disabled" : ""}>${related.length ? "Go one step deeper ↗" : "You’ve explored these connections"}</button></div>`;
+      $("#thread-back").onclick = () => revisitStep(state.path.length - 2);
+      $("#thread-root").onclick = () => revisitStep(0);
+      $("#thread-deeper").onclick = () => related[0] && choose(related[0].p.id);
+      $$("[data-step]").forEach((b) => b.onclick = () => revisitStep(Number(b.dataset.step)));
+    }
+    $("#thread-cards").innerHTML = related.length
+      ? related.map((r) => `<button class="thread-card" data-branch="${esc(r.p.id)}" style="--color:#c4a4ec"><small>${esc(connectionLabel(r.kind).toUpperCase())}</small><span>${esc(r.p.title)}</span><b>↗</b></button>`).join("")
+      : '<p class="thread-end">No further connected papers match this question and your filters. Go back a step to take another branch.</p>';
+    $$("[data-branch]").forEach((b) => b.onclick = () => { choose(b.dataset.branch); $("#thread-context").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  }
+  function revisitStep(index) {
+    if (index < 0 || index >= state.path.length) return;
+    state.path = state.path.slice(0, index + 1);
+    choose(state.path[index], false);
   }
   function toggleSave(id) {
     if (saved.includes(id)) {
@@ -204,7 +262,7 @@
         .filter((t) => (p.title + " " + p.abstract).toLowerCase().includes(t))
         .slice(0, 5);
     const selectedSaved = saved.includes(p.id);
-    const related = engine.related(p.id, 3);
+    const related = connectedPapers(p);
     const text =
       p.abstract ||
       "No abstract is supplied for this paper in the source metadata. Open the original record to investigate it.";
@@ -605,25 +663,6 @@
         search();
       }),
   );
-  $("#thread-cards").innerHTML = ["dreams", "connection", "awe"]
-    .map(
-      (key) =>
-        `<button class="thread-card" data-thread="${key}" style="--color:${themes[key].color}"><small>${esc(themes[key].name.toUpperCase())}</small><span>${{ dreams: "Where do dreams take us?", connection: "What makes us feel connected?", awe: "Why do we need a little wonder?" }[key]}</span><b>↗</b></button>`,
-    )
-    .join("");
-  $$("[data-thread]").forEach(
-    (b) =>
-      (b.onclick = () => {
-        state.theme = "";
-        $("#query").value = themes[b.dataset.thread].query;
-        $$("[data-theme]").forEach((x) => x.classList.remove("active"));
-        search();
-        $("#search-form").scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }),
-  );
   $$("[data-view]").forEach((b) => (b.onclick = () => view(b.dataset.view)));
   $(".brand").onclick = (e) => {
     e.preventDefault();
@@ -633,7 +672,16 @@
     e.preventDefault();
     state.theme = "";
     $$("[data-theme]").forEach((x) => x.classList.remove("active"));
-    search();
+    if ($("#query").value.trim() === state.origin && state.following) {
+      const next = connectedPapers(D.papers[engine.ids.get(state.selected)], 1)[0];
+      if (next) choose(next.p.id);
+      else toast("You’ve reached the end of this branch. Go back to explore another connection.");
+    } else {
+      search();
+      state.following = true;
+      renderThread();
+    }
+    $("#thread-context").scrollIntoView({ behavior: "smooth", block: "start" });
   };
   $$("[data-question]").forEach(
     (b) =>

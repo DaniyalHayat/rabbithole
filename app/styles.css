@@ -798,6 +798,27 @@ h1 span {
   gap: 10px;
   flex: 1;
 }
+.thread-context {
+  border: 1px solid var(--line);
+  background: linear-gradient(135deg, #211a2e, #17151e);
+  padding: 24px;
+  border-radius: 14px;
+  margin: 20px 0 24px;
+  scroll-margin-top: 20px;
+}
+.thread-top { display: flex; justify-content: space-between; gap: 12px; color: var(--purple); font-size: 12px; }
+.thread-context h2 { font-size: 23px; margin: 9px 0 16px; }
+.thread-context h3 { font-size: 18px; margin: 14px 0; line-height: 1.5; }
+.thread-history { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.thread-history button, .thread-actions button { border: 1px solid var(--line); background: #282131; color: var(--text); border-radius: 8px; padding: 9px 12px; text-align: left; font-size: 12px; }
+.thread-history button[aria-current] { border-color: var(--purple); }
+.thread-connection { margin-top: 17px; font-size: 12px; color: var(--muted); }
+.thread-source-label { margin-top: 18px; font-size: 9px; }
+.thread-context blockquote { margin: 10px 0 14px; padding-left: 16px; border-left: 2px solid var(--purple); font-size: 14px; line-height: 1.8; color: #d3cddd; }
+.thread-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.thread-actions button:last-child { color: var(--purple); }
+.thread-actions button:disabled { opacity: .45; cursor: default; }
+.thread-end { font-size: 12px; line-height: 1.7; color: var(--muted); grid-column: 1 / -1; }
 .thread-card {
   text-align: left;
   background: #1b1722;
