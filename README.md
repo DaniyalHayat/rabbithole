@@ -6,7 +6,7 @@ I built RabbitHole for the moment when a small question turns into an hour of cl
 
 I wanted a way to follow those questions through real research, see how papers connect, and leave myself a useful trail to come back to.
 
-[**Open the interactive Figma app**](https://www.figma.com/make/AJhaZiufnubi0QBAiJPasT) · [My demo walkthrough](docs/DEMO.md) · [Methods and limitations](docs/METHODOLOGY.md)
+[**Open the interactive Figma app**](https://rabbit-hole-daniyalh-35298519.figma.site/) · [My demo walkthrough](docs/DEMO.md) · [Methods and limitations](docs/METHODOLOGY.md)
 
 ![RabbitHole running in Figma](docs/figma-preview.png)
 
