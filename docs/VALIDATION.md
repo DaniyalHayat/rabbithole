@@ -43,4 +43,8 @@ The fresh offline build also succeeded using only checked-in source files and th
 
 ## Publication
 
-GitHub and Figma outcomes are recorded in the handoff. Source import, running preview, and public publication are distinct states. There is no claim of production adoption, improved learning, or a statistically significant retrieval improvement.
+The repository was pushed to [GitHub](https://github.com/DaniyalHayat/rabbithole), and its [initial GitHub Actions run](https://github.com/DaniyalHayat/rabbithole/actions/runs/40607105745) passed on Linux.
+
+The final source was imported into [Figma Make](https://www.figma.com/make/AJhaZiufnubi0QBAiJPasT). I opened the Figma-hosted runtime directly and verified the working app, switched the ML mode, opened the atlas, and filtered it to music. `docs/figma-preview.png` captures that running preview. Figma's sharing dialog confirmed **Anyone can view**. The editor showed an intermittent M8 loading error in its AI chat area; the separate hosted preview worked.
+
+The file and runtime preview are available; a separate production `figma.site` publication was not completed. The publishing dialog introduces Figma's Beta Terms, so I left that optional action unsubmitted. There is no claim of production adoption, improved learning, or a statistically significant retrieval improvement.
