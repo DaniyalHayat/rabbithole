@@ -1,0 +1,135 @@
+{
+  "retrieved_at": "2026-10-27T23:29:37.277702+00:00",
+  "provider": "OpenAlex",
+  "selection": "Top 100 relevance-ranked results for each of 16 fixed curiosity searches; not a representative literature census.",
+  "files": [
+    {
+      "file": "music_0.json",
+      "theme": "music",
+      "query": "music memory emotion",
+      "url": "https://api.openalex.org/works?search=music+memory+emotion&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "bb07e9a0470c023774cc09d5e714ea2648ad71b69994cefbbaf828219cba0098",
+      "rows": 100
+    },
+    {
+      "file": "music_1.json",
+      "theme": "music",
+      "query": "involuntary musical imagery earworms",
+      "url": "https://api.openalex.org/works?search=involuntary+musical+imagery+earworms&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "9e03a4770aea92cf060d1b830b9fc042b3bb520f9821a768928a1b6b4a2578db",
+      "rows": 100
+    },
+    {
+      "file": "dreams_0.json",
+      "theme": "dreams",
+      "query": "dreaming sleep memory consolidation",
+      "url": "https://api.openalex.org/works?search=dreaming+sleep+memory+consolidation&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "1d887edcc4188af1edff599c6f31a06cb60b1cf6eb6b6cddd43688f848f9a05e",
+      "rows": 100
+    },
+    {
+      "file": "dreams_1.json",
+      "theme": "dreams",
+      "query": "lucid dreaming consciousness",
+      "url": "https://api.openalex.org/works?search=lucid+dreaming+consciousness&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "c7ec8b30905dd976a13fa3b84076bc28e27a337c7d3a3a25f1be3d88244e4b1f",
+      "rows": 100
+    },
+    {
+      "file": "attention_0.json",
+      "theme": "attention",
+      "query": "attention distraction multitasking",
+      "url": "https://api.openalex.org/works?search=attention+distraction+multitasking&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "1bbdb1d7721e1dea7a280d124c046ea49220aa718f8b0ea1d71af896f0174079",
+      "rows": 100
+    },
+    {
+      "file": "attention_1.json",
+      "theme": "attention",
+      "query": "social media attention wellbeing",
+      "url": "https://api.openalex.org/works?search=social+media+attention+wellbeing&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "76ea8ae18acc4fe51e4d24b98eb50016b7954f71c7e9fd390fa651cb73bbf556",
+      "rows": 100
+    },
+    {
+      "file": "connection_0.json",
+      "theme": "connection",
+      "query": "loneliness social connection",
+      "url": "https://api.openalex.org/works?search=loneliness+social+connection&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "28eb8d4fc9fc0b222ee406d0be3eae8ce8785e4486fe6eca4bf85bdb83fd41f3",
+      "rows": 100
+    },
+    {
+      "file": "connection_1.json",
+      "theme": "connection",
+      "query": "friendship interpersonal synchrony",
+      "url": "https://api.openalex.org/works?search=friendship+interpersonal+synchrony&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "9ce09e8335a83f0b857a06a4339a6d4b6aa8ac1bf3540abbeeb737162c5b7aac",
+      "rows": 100
+    },
+    {
+      "file": "creativity_0.json",
+      "theme": "creativity",
+      "query": "creativity divergent thinking",
+      "url": "https://api.openalex.org/works?search=creativity+divergent+thinking&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "7bca7ad572167c1d7f7b92c03df5d606434b9f07b64e8f0f9da6820c8bb8a562",
+      "rows": 100
+    },
+    {
+      "file": "creativity_1.json",
+      "theme": "creativity",
+      "query": "curiosity learning information gap",
+      "url": "https://api.openalex.org/works?search=curiosity+learning+information+gap&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "282b09ace17ddac9723b6e984c689d8e58c4944486315674b8881d244c978e0f",
+      "rows": 100
+    },
+    {
+      "file": "habits_0.json",
+      "theme": "habits",
+      "query": "habit formation behavior change",
+      "url": "https://api.openalex.org/works?search=habit+formation+behavior+change&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "4cd3f7c308285aacea347e3ce9855583c4bb0d58edaed0ba03745685b7db66a6",
+      "rows": 100
+    },
+    {
+      "file": "habits_1.json",
+      "theme": "habits",
+      "query": "procrastination self regulation",
+      "url": "https://api.openalex.org/works?search=procrastination+self+regulation&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "d383ad8d9f45e6a032973297f1b8555b2c2fda70b86743c1a25e331d36af4ab1",
+      "rows": 100
+    },
+    {
+      "file": "awe_0.json",
+      "theme": "awe",
+      "query": "awe nature wellbeing",
+      "url": "https://api.openalex.org/works?search=awe+nature+wellbeing&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "c52cceaab7145fecf90ee80ab0e56a4e3b2613984b4d00dc89b2f73cddf013bb",
+      "rows": 100
+    },
+    {
+      "file": "awe_1.json",
+      "theme": "awe",
+      "query": "urban green space mental wellbeing",
+      "url": "https://api.openalex.org/works?search=urban+green+space+mental+wellbeing&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "2aa77bb7dc0ea99cf5757bfcb18133327ef43988ae115f90680b8507f790f578",
+      "rows": 100
+    },
+    {
+      "file": "perception_0.json",
+      "theme": "perception",
+      "query": "time perception subjective experience",
+      "url": "https://api.openalex.org/works?search=time+perception+subjective+experience&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "bb89457110b6f5b8eba6fb6c32dddece7e380276c6f50f89e6cd88e81bfee53d",
+      "rows": 100
+    },
+    {
+      "file": "perception_1.json",
+      "theme": "perception",
+      "query": "visual perception illusions",
+      "url": "https://api.openalex.org/works?search=visual+perception+illusions&per_page=100&select=id%2Ctitle%2Cdoi%2Cpublication_year%2Cpublication_date%2Ctype%2Ccited_by_count%2Copen_access%2Ctopics%2Creferenced_works%2Cabstract_inverted_index%2Cauthorships%2Cis_retracted&filter=language%3Aen%2Cto_publication_date%3A2026-10-27",
+      "sha256": "705ff0f1ec2534be779823e006f3697422dec3f5fd3029286f05fd66f453fbc4",
+      "rows": 100
+    }
+  ]
+}

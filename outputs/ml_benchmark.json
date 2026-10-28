@@ -1,0 +1,43 @@
+{
+  "dataset": "BEIR SciFact",
+  "documents": 5183,
+  "training_queries": 809,
+  "development_queries": 164,
+  "fitting_queries": 645,
+  "test_queries": 300,
+  "training_pairs": 13785,
+  "regularization_search": [
+    {
+      "l2": 0.001,
+      "development_ndcg10": 0.6998373477466048
+    },
+    {
+      "l2": 0.01,
+      "development_ndcg10": 0.6951542181677999
+    },
+    {
+      "l2": 0.1,
+      "development_ndcg10": 0.6849909924060993
+    }
+  ],
+  "selected_l2": 0.001,
+  "metrics": {
+    "ndcg10": 0.6436478490834238,
+    "recall10": 0.7655,
+    "mrr10": 0.6104616402116402
+  },
+  "hybrid_baseline": {
+    "ndcg10": 0.6714133416551026,
+    "recall10": 0.7874444444444445,
+    "mrr10": 0.6391269841269841
+  },
+  "paired_ndcg_difference": -0.02776549257167898,
+  "paired_bootstrap_95_ci": [
+    -0.044681927764464696,
+    -0.011463339419829804
+  ],
+  "bootstrap_resamples": 5000,
+  "seed": 42,
+  "scope": "Experimental cross-domain transfer to curiosity papers; scores are ranking utilities, not calibrated relevance probabilities.",
+  "development_split": "Deterministic query-text hash within official train; near-duplicate semantic claims may cross partitions. No official test labels select model or regularization."
+}

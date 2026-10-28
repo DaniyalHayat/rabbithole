@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Follow your curiosity through real research. Explore an explainable citation graph and build your own reading trails."
+    />
+    <title>RabbitHole — Follow your curiosity</title>
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="atlas.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to research</a>
+    <aside class="sidebar">
+      <a href="#" class="brand" aria-label="RabbitHole home"
+        ><svg width="30" height="38" viewBox="0 0 30 38" aria-hidden="true">
+          <ellipse
+            cx="10"
+            cy="10"
+            rx="4"
+            ry="10"
+            transform="rotate(-14 10 10)"
+          />
+          <ellipse
+            cx="22"
+            cy="10"
+            rx="4"
+            ry="10"
+            transform="rotate(14 22 10)"
+          />
+          <circle cx="16" cy="25" r="11" />
+          <circle cx="13" cy="23" r="1.3" fill="#15131e" />
+          <circle cx="21" cy="23" r="1.3" fill="#15131e" /></svg
+        ><span>rabbithole<span class="brand-dot">.</span></span></a
+      >
+      <p class="eyebrow side-label">YOUR NEXT GOOD QUESTION</p>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button data-view="explore" class="active">
+          <span>⌘</span> Explore</button
+        ><button data-view="trails">
+          <span>↝</span> My trails
+          <span id="saved-count" class="count">0</span></button
+        ><button data-view="atlas"><span>◎</span> Research atlas</button
+        ><button data-view="method"><span>◈</span> Behind the map</button>
+      </nav>
+      <div class="side-divider"></div>
+      <p class="eyebrow side-label">FOLLOW A THREAD</p>
+      <div id="theme-nav" class="theme-nav"></div>
+      <div class="side-bottom">
+        <div class="status-dot"></div>
+        <span>Real papers. Real connections.</span>
+        <p id="snapshot-label">OpenAlex research snapshot</p>
+        <a
+          href="https://github.com/DaniyalHayat/rabbithole"
+          target="_blank"
+          rel="noopener"
+          >View the project <span>↗</span></a
+        >
+      </div>
+    </aside>
+    <main id="main">
+      <header class="topbar">
+        <span class="breadcrumb"
+          >Your curiosity <span>/</span>
+          <strong id="view-label">Explore</strong></span
+        ><button class="quiet" id="surprise">Surprise me <span>✧</span></button>
+      </header>
+      <section id="explore-view">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">
+              <span class="tiny-star">✦</span> A LITTLE CURIOSITY GOES A LONG
+              WAY
+            </p>
+            <h1>One question.<br /><span>Endless rabbit holes.</span></h1>
+            <p class="intro-copy">
+              Follow the ideas that won’t leave your head.<br />Find the
+              research. Make unexpected connections.
+            </p>
+          </div>
+          <div class="orbit-art" aria-hidden="true">
+            <div class="orbit o1"></div>
+            <div class="orbit o2"></div>
+            <div class="planet"></div>
+            <span class="star s1">✦</span><span class="star s2">✧</span
+            ><span class="star s3">✦</span
+            ><span class="orbit-label">STAY CURIOUS</span>
+          </div>
+        </div>
+        <form id="search-form" class="search-box" role="search">
+          <span aria-hidden="true">⌕</span
+          ><label class="sr-only" for="query">Your research question</label
+          ><input
+            id="query"
+            type="search"
+            maxlength="300"
+            value="Why do songs get stuck in my head?"
+            placeholder="What have you always wondered about?"
+            autocomplete="off"
+          /><button type="submit">Follow the thread <span>↗</span></button>
+        </form>
+        <div class="question-chips" aria-label="Try a question">
+          <span>OR WONDER ABOUT</span
+          ><button data-question="Why do we dream?">Why we dream</button
+          ><button data-question="How does curiosity help learning?">
+            The curious brain</button
+          ><button data-question="Why do we procrastinate?">
+            Putting things off
+          </button>
+        </div>
+        <div class="workspace">
+          <section class="map-panel" aria-labelledby="map-heading">
+            <div class="map-toolbar">
+              <div>
+                <h2 id="map-heading">
+                  Your curiosity map <span class="live-pill">EXPLORE</span>
+                </h2>
+                <p id="result-summary" aria-live="polite">
+                  Connecting the dots…
+                </p>
+              </div>
+              <div class="segmented" aria-label="Research presentation">
+                <button id="map-tab" aria-pressed="true">Map</button
+                ><button id="list-tab" aria-pressed="false">List</button>
+              </div>
+            </div>
+            <div class="filter-row">
+              <label for="ranking-mode"
+                >Ranking
+                <select id="ranking-mode">
+                  <option value="hybrid">Hybrid search</option>
+                  <option value="learned">ML reranker · experimental</option>
+                </select></label
+              >
+              <label><input id="oa-filter" type="checkbox" /> Open access</label
+              ><label for="year-filter"
+                >Published
+                <select id="year-filter">
+                  <option value="0">Any time</option>
+                  <option value="2010">Since 2010</option>
+                  <option value="2020">Since 2020</option>
+                  <option value="2024">Since 2024</option>
+                </select></label
+              ><label for="edge-filter"
+                >Links
+                <select id="edge-filter">
+                  <option value="all">All connections</option>
+                  <option value="citation">Citations only</option>
+                  <option value="topic">Shared topics only</option>
+                  <option value="similarity">Similarity only</option>
+                </select></label
+              >
+            </div>
+            <div id="map-stage" class="map-stage">
+              <svg
+                id="graph"
+                viewBox="0 0 880 530"
+                role="img"
+                aria-label="Interactive research map. Use the List view for keyboard navigation."
+              >
+                <g id="graph-world"></g>
+              </svg>
+              <div id="map-empty" class="empty hidden">
+                <span>✧</span>
+                <h3>A thread we haven’t found yet.</h3>
+                <p>
+                  Try music, dreams, habits, creativity, nature, attention,
+                  time, or friendship.
+                </p>
+                <button id="reset-search">Explore music & memory</button>
+              </div>
+              <div class="map-caption">
+                <span class="legend-dot"></span> Selected paper <i></i
+                ><span class="line-solid"></span> Citation <i></i
+                ><span class="line-dashed"></span> Topic / similarity
+              </div>
+              <div class="map-controls">
+                <button id="zoom-in" aria-label="Zoom in">+</button
+                ><button id="zoom-out" aria-label="Zoom out">−</button
+                ><button id="zoom-reset" aria-label="Reset map position">
+                  ⌖
+                </button>
+              </div>
+              <div class="map-hint">
+                Map shows up to 24 matches · Drag to explore
+              </div>
+            </div>
+            <div
+              id="results-list"
+              class="results-list hidden"
+              aria-label="Search results"
+            ></div>
+            <div class="map-footer">
+              <span>↳ A map of connections, not scientific consensus.</span
+              ><button id="create-trail">
+                Build a reading trail <span>↗</span>
+              </button>
+            </div>
+          </section>
+          <aside
+            id="paper-panel"
+            class="paper-panel"
+            aria-label="Selected research paper"
+          ></aside>
+        </div>
+        <section class="bottom-strip">
+          <div>
+            <p class="eyebrow">A WORLD OF QUESTIONS</p>
+            <h2>Follow a different thread.</h2>
+          </div>
+          <div id="thread-cards" class="thread-cards"></div>
+        </section>
+      </section>
+      <section id="trails-view" class="hidden secondary-view">
+        <p class="eyebrow">YOUR SMALL COLLECTION OF BIG IDEAS</p>
+        <h1>Leave yourself a trail.</h1>
+        <p class="intro-copy">
+          Keep the papers you want to come back to. Your collection stays in
+          this browser.
+        </p>
+        <div class="trail-actions">
+          <button id="export-trail" class="primary">
+            Export reading list ↗</button
+          ><button id="clear-trail" class="quiet">Clear collection</button>
+        </div>
+        <div id="trail-list"></div>
+      </section>
+      <section id="atlas-view" class="hidden secondary-view">
+        <p class="eyebrow">IDEAS HAVE CONNECTIONS ACROSS BORDERS</p>
+        <h1>Where research connects.</h1>
+        <p class="intro-copy">
+          Explore the countries of institutions listed on these papers.<br />This
+          reflects a small selected snapshot, not national research output or
+          researchers’ identities.
+        </p>
+        <div class="atlas-toolbar">
+          <label for="atlas-theme"
+            >Thread
+            <select id="atlas-theme">
+              <option value="">All threads</option>
+            </select></label
+          ><button id="atlas-export" class="primary">Export GeoJSON ↗</button>
+        </div>
+        <div class="atlas-layout">
+          <div class="atlas-map">
+            <svg
+              id="atlas-svg"
+              viewBox="0 0 900 460"
+              role="img"
+              aria-label="World research affiliation map. Use the country buttons below for keyboard navigation."
+            ></svg>
+            <p>
+              Made with Natural Earth · WGS84 longitude/latitude · Country
+              affiliation counts
+            </p>
+          </div>
+          <aside id="atlas-detail" class="method-card"></aside>
+        </div>
+        <div
+          id="atlas-countries"
+          class="country-list"
+          aria-label="Countries represented in this snapshot"
+        ></div>
+      </section>
+      <section id="method-view" class="hidden secondary-view">
+        <p class="eyebrow">CURIOUS ABOUT THE CURIOSITY?</p>
+        <h1>Look behind the map.</h1>
+        <p class="intro-copy">
+          A small, inspectable research engine. No generated scientific answers.
+        </p>
+        <div id="method-content"></div>
+      </section>
+      <footer>
+        Built for people who ask one more question.
+        <span
+          >Independent project · Research discovery, not scientific
+          advice.</span
+        >
+      </footer>
+    </main>
+    <dialog id="compare-dialog">
+      <div class="dialog-head">
+        <h2>Two ideas. Side by side.</h2>
+        <button id="close-compare" class="quiet" aria-label="Close comparison">
+          ✕
+        </button>
+      </div>
+      <div id="compare-content"></div>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+    <script src="data.js"></script>
+    <script src="search.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

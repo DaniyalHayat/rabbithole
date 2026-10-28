@@ -1,0 +1,33 @@
+{
+  "weights": [
+    0.8928917590080203,
+    0.1682697067096746,
+    -0.11440322037813458,
+    0.35125695745469965,
+    0.07272354384253499
+  ],
+  "scale": [
+    0.4063772915767674,
+    0.18285433076084817,
+    0.25813183492848957,
+    0.20818340907763042,
+    0.04439841262212638
+  ],
+  "l2": 0.001,
+  "steps": 600,
+  "feature_names": [
+    "normalized_bm25",
+    "positive_lsa_cosine",
+    "query_coverage",
+    "title_coverage",
+    "log_document_length"
+  ],
+  "loss_first": 0.6931478688284118,
+  "loss_last": 0.5375548988200798,
+  "training_dataset": "BEIR SciFact official train",
+  "training_queries": 809,
+  "training_pairs": 13785,
+  "candidate_pool": 50,
+  "negative_policy": "Top 15 unjudged/nonrelevant hybrid candidates per labeled positive; unjudged is an assumption, not verified nonrelevance.",
+  "scope": "Experimental cross-domain transfer to curiosity papers; scores are ranking utilities, not calibrated relevance probabilities."
+}
