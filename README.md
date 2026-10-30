@@ -6,7 +6,7 @@ I built RabbitHole for the moment when a small question turns into an hour of cl
 
 I wanted a way to follow those questions through real research, see how papers connect, and leave myself a useful trail to come back to.
 
-[**Open the interactive Figma app**](https://rabbit-hole-daniyalh-35298519.figma.site/) · [My demo walkthrough](docs/DEMO.md) · [Methods and limitations](docs/METHODOLOGY.md)
+[**Open the interactive Figma app**](https://rabbit-hole-daniyalh-35298519.figma.site/) · [Methods and limitations](docs/METHODOLOGY.md)
 
 ![RabbitHole running in Figma](docs/figma-preview.png)
 
@@ -107,6 +107,6 @@ tests/               Python and browser-engine tests
 docs/                Method, attribution, validation, demo, and resume entries
 ```
 
-I wrote a [short interview walkthrough](docs/DEMO.md) and [resume versions](docs/RESUME.md) that use the actual project measurements. My next steps would be independently judged curiosity queries, a usability study, and an evaluation against modern neural embeddings.
+My next steps would be independently judged curiosity queries, a usability study, and an evaluation against modern neural embeddings.
 
 Software: MIT. Research data and linked papers have separate upstream terms; see [sources and attribution](docs/SOURCES.md).
