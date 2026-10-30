@@ -1,7 +1,5 @@
 # RabbitHole
 
-**One question. Endless rabbit holes.**
-
 I built RabbitHole for the moment when a small question turns into an hour of clicking through tabs. Why do songs get stuck in my head? Why does time feel different when I'm absorbed in something? What makes people feel connected?
 
 I wanted a way to follow those questions through real research, see how papers connect, and leave myself a useful trail to come back to.
