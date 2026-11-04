@@ -1,7 +1,9 @@
 {
   "source": "Natural Earth 1:110m countries",
   "url": "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson",
-  "sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f",
+  "sha256": "d2aec98bfd1ffda2d8adea42b7ec473365eef38defc48e83afb7d58ae60bfe7c",
+  "upstream_sha256": "6866c877d39cba9c357620878839b336d569f8c662d3cfab4cb1dbe2d39c977f",
+  "serialization": "Bundled JSON was reformatted; parsed geometry and properties verified equal to the cited upstream source on 2026-11-04.",
   "license": "Public domain",
   "coordinate_reference": "WGS84 longitude, latitude"
 }

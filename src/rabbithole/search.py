@@ -25,6 +25,10 @@ class SearchIndex:
         self.n = len(docs)
         self.lengths = np.array([sum(c.values()) for c in self.counts], dtype=float)
         self.avgdl = max(float(self.lengths.mean()), 1.)
+        self.postings = {}
+        for i, row in enumerate(self.counts):
+            for term, count in row.items():
+                self.postings.setdefault(term, []).append((i, count))
         self.vocab = sorted(t for t, n in self.df.items() if n >= 2)
         self.term_id = {t: i for i, t in enumerate(self.vocab)}
         self.idf = np.array([math.log((1 + self.n) / (1 + self.df[t])) + 1 for t in self.vocab])
@@ -64,8 +68,10 @@ class SearchIndex:
             if t not in self.df:
                 continue
             idf = math.log(1 + (self.n - self.df[t] + .5) / (self.df[t] + .5))
-            tf = np.array([c.get(t, 0) for c in self.counts], dtype=float)
-            scores += idf * tf * 2.2 / (tf + 1.2 * (.25 + .75 * self.lengths / self.avgdl))
+            postings = self.postings[t]
+            indices = np.array([i for i, _ in postings], dtype=int)
+            tf = np.array([count for _, count in postings], dtype=float)
+            scores[indices] += idf * tf * 2.2 / (tf + 1.2 * (.25 + .75 * self.lengths[indices] / self.avgdl))
         return scores
 
     def semantic(self, query):

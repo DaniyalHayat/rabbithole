@@ -1,0 +1,2 @@
+-r requirements-cache.txt
+fakeredis==2.32.1

@@ -1,6 +1,6 @@
 """Static app + read-only local API. Bind locally; no account, secrets or LLM needed."""
 from __future__ import annotations
-import argparse, json, sqlite3, sys
+import argparse, hashlib, json, os, sqlite3, sys
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -8,11 +8,14 @@ from urllib.parse import parse_qs, urlsplit
 ROOT=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT/'src'))
 from rabbithole.search import SearchIndex, tokenize
+from rabbithole.cache import SearchCache
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--port',type=int,default=8765);args=parser.parse_args()
     bundle=json.loads((ROOT/'data/processed/corpus.json').read_text(encoding='utf-8')) if (ROOT/'data/processed/corpus.json').exists() else None
     index=SearchIndex([{'id':p['id'],'title':p['title'],'text':p['title']+' '+p['title']+' '+p['abstract']+' '+' '.join(t['name'] for t in p['topics'])} for p in bundle['papers']]) if bundle else None
+    namespace=hashlib.sha256((ROOT/'data/processed/corpus.json').read_bytes()).hexdigest() if bundle else 'missing'
+    cache=SearchCache(namespace, os.getenv('REDIS_URL'))
     class Handler(SimpleHTTPRequestHandler):
         def do_GET(self):
             url=urlsplit(self.path)
@@ -22,8 +25,8 @@ def main():
                 query=parse_qs(url.query).get('q',[''])[0][:500]
                 if url.path=='/api/health':self.send_json({'status':'ok',**bundle['stats']});return
                 if url.path=='/api/search':
-                    result=[{**bundle['papers'][i],'score':score} for i,score in index.rank(query,limit=40) if not bundle['papers'][i]['retracted']][:20]
-                    self.send_json({'results':result,'query':query});return
+                    result, cache_status=cache.get_or_compute({'query':query,'limit':20}, lambda: [{**bundle['papers'][i],'score':score} for i,score in index.rank(query,limit=40) if not bundle['papers'][i]['retracted']][:20])
+                    self.send_json({'results':result,'query':query,'cache':cache_status});return
                 if url.path=='/api/fts':
                     safe=' OR '.join('"'+t+'"' for t in tokenize(query))
                     with sqlite3.connect('file:'+str(ROOT/'data/processed/research.sqlite')+'?mode=ro',uri=True) as db:

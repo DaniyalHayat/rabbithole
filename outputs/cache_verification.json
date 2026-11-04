@@ -1,0 +1,8 @@
+{
+  "redis_version": "7.4.7",
+  "real_server": true,
+  "cache_hits": 20,
+  "expiry_verified": true,
+  "mean_hit_ms": 0.4667949993745424,
+  "scope": "Local cache protocol check, not production search latency"
+}

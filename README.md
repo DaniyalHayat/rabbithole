@@ -28,7 +28,7 @@ Download the repository and open **`app/index.html`** in a modern browser. All r
 For a local web preview and optional API, install Python 3.11 or later and NumPy:
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
 python run.py
 python serve.py --port 8765
 ```
@@ -108,3 +108,7 @@ docs/                Method, attribution, validation, demo, and resume entries
 My next steps would be independently judged curiosity queries, a usability study, and an evaluation against modern neural embeddings.
 
 Software: MIT. Research data and linked papers have separate upstream terms; see [sources and attribution](docs/SOURCES.md).
+
+## November 4 implementation and validation
+
+Install `requirements-dev.txt`, start `docker compose up -d`, set `REDIS_URL=redis://127.0.0.1:6379/0`, then run `python serve.py`. The optional Python API cache uses corpus/version/query keys, 300-second expiry and an uncached fallback when Redis is unavailable. Run `python scripts/verify_cache.py` for a real-server receipt. Redis 7.4.7 passed 20 cache hits and expiry checks on November 4. Sparse BM25 postings preserve the dense equation while avoiding nonmatching documents. The suite now contains 43 Python and 24 browser-engine tests. The browser remains offline; cache timing is not a ranking-quality or production latency claim.
