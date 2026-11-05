@@ -45,10 +45,10 @@ The fresh offline build also succeeded using only checked-in source files and th
 
 The repository was pushed to [GitHub](https://github.com/DaniyalHayat/rabbithole), and its [initial GitHub Actions run](https://github.com/DaniyalHayat/rabbithole/actions/runs/40607105745) passed on Linux.
 
-The final source was imported into [Figma Make](https://www.figma.com/make/AJhaZiufnubi0QBAiJPasT). I opened the Figma-hosted runtime directly and verified the working app, switched the ML mode, opened the atlas, and filtered it to music. `docs/figma-preview.png` captures that running preview. Figma's sharing dialog confirmed **Anyone can view**.
+I imported the static source into Figma and tested the public browser preview. I switched to the experimental ranking mode, opened the atlas, and filtered it to music. [The preview screenshot](figma-preview.png) records that check.
 
 The app is now published at [its existing Figma site](https://rabbit-hole-daniyalh-35298519.figma.site/). I updated that same destination after the initial publication. There is no claim of production adoption, improved learning, or a statistically significant retrieval improvement.
 
 ## Connected reading paths
 
-I verified the updated Follow the thread interaction in the existing Make file and published app. It retains the original question, reveals attributed source-abstract excerpts, and offers related branches within that question's matching papers. Repeated clicks on the earworm example advance from involuntary musical imagery to related earworm research; Previous step and Back to the original retain the question. No URL changes are needed. JavaScript syntax and the 24 existing browser-engine checks passed. `docs/thread-following.png` captures the published interaction.
+I verified the updated Follow the thread interaction in the published app. It retains the original question, reveals attributed source-abstract excerpts, and offers related branches within that question's matching papers. Repeated clicks on the earworm example advance from involuntary musical imagery to related earworm research. Previous step and Back to the original retain the question. JavaScript syntax and the 24 browser-engine checks passed. [The interaction screenshot](thread-following.png) shows the published app.
