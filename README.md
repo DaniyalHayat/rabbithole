@@ -1,8 +1,6 @@
 # RabbitHole
 
-I built RabbitHole for the moment when a small question turns into an hour of clicking through tabs. Why do songs get stuck in my head? Why does time feel different when I'm absorbed in something? What makes people feel connected?
-
-I wanted a way to follow those questions through real research, see how papers connect, and leave myself a useful trail to come back to.
+I built RabbitHole for the moment when a small question turns into an hour of clicking through tabs. Search a question like “Why do songs get stuck in my head?”, follow citations between papers, and save a reading trail.
 
 [**Open the interactive Figma app**](https://rabbit-hole-daniyalh-35298519.figma.site/) · [Methods and limitations](docs/METHODOLOGY.md)
 
@@ -35,7 +33,9 @@ python serve.py --port 8765
 
 Open `http://127.0.0.1:8765`. The rebuild uses the checked-in compressed source snapshot; it does not need to fetch fresh research. `GET /api/health`, `/api/search?q=music%20memory`, and `/api/fts?q=music%20memory` expose the local analytical layer.
 
-Start with **"Why do songs get stuck in my head?"** Then try the open-access filter, compare two papers, and build a reading trail. Press `/` to focus search. A list view provides a keyboard-friendly alternative to the graph.
+Try the open-access filter, compare two papers, and build a reading trail. Press `/` to focus search or switch to the keyboard-friendly list view.
+
+For an optional Redis cache on the local Python API, run `docker compose up -d` and set `REDIS_URL=redis://127.0.0.1:6379/0` before starting `serve.py`. Cache keys include the corpus, version, and query. Entries expire after 300 seconds, and search still runs if Redis is unavailable. Use `python scripts/verify_cache.py` to check hits and expiry against a running Redis server.
 
 ## How I measured it
 
@@ -71,7 +71,7 @@ The fetcher is anonymous, caches successful responses, checks response schemas, 
 | Acquisition | Anonymous OpenAlex requests, fixed query manifest, SHA-256 source checksums, offline source archive |
 | Data | ID-based deduplication, source provenance, abstract reconstruction, validation/quarantine, retraction flags |
 | Storage | SQLite tables, constraints, foreign keys, normalized topic/citation relationships, FTS5 |
-| Search | BM25, randomized LSA, transparent score fusion, documented question expansion |
+| Search | Sparse BM25 postings, randomized LSA, score fusion, documented question expansion |
 | Graph analysis | Directed citations, PageRank with dangling-node handling, components, personalized ranking and path algorithms |
 | Product | Responsive map/list interface, source panels, comparison dialog, saved trails, export |
 | Evaluation | Train/test separation, nDCG/recall/MRR, 5,000 paired bootstrap resamples, browser/Python parity |
@@ -79,7 +79,7 @@ The fetcher is anonymous, caches successful responses, checks response schemas, 
 | Geography | Institution-country aggregation, interactive atlas, WGS84 GeoJSON, normalized SQL country memberships |
 | Companion analysis | Executed R and MATLAB PageRank replications and paired-metric analysis |
 
-I ran the independent R and MATLAB analyses in [`replication/`](replication/); both matched Python's PageRank reference. The browser and Python implementations pass **64 automated tests**, including sixteen hybrid/ML ranking-parity query cases. See [VALIDATION.md](docs/VALIDATION.md).
+The independent R and MATLAB analyses both matched Python's PageRank reference. The checked-in test reports record 43 Python and 24 browser-engine passes. Redis 7.4.7 was checked for cache hits and expiry. [Replication scripts](replication/) · [Validation record](docs/VALIDATION.md) · [Redis check](outputs/cache_verification.json)
 
 The learned reranker scored **0.6436 nDCG@10**, below the hybrid baseline's **0.6714** on held-out SciFact queries. I kept hybrid as the default and exposed the learned model as an experimental comparison. I explain the training data, selection, failure to generalize, and deployment decision in the [model card](docs/MODEL_CARD.md).
 
@@ -102,13 +102,9 @@ data/                Locked source archive and provenance manifests
 outputs/             Measured metrics, reference calculations, test reports
 replication/         Executed R and MATLAB analytical companions
 tests/               Python and browser-engine tests
-docs/                Method, attribution, validation, demo, and resume entries
+docs/                Methods, sources, and validation
 ```
 
 My next steps would be independently judged curiosity queries, a usability study, and an evaluation against modern neural embeddings.
 
 Software: MIT. Research data and linked papers have separate upstream terms; see [sources and attribution](docs/SOURCES.md).
-
-## November 4 implementation and validation
-
-Install `requirements-dev.txt`, start `docker compose up -d`, set `REDIS_URL=redis://127.0.0.1:6379/0`, then run `python serve.py`. The optional Python API cache uses corpus/version/query keys, 300-second expiry and an uncached fallback when Redis is unavailable. Run `python scripts/verify_cache.py` for a real-server receipt. Redis 7.4.7 passed 20 cache hits and expiry checks on November 4. Sparse BM25 postings preserve the dense equation while avoiding nonmatching documents. The suite now contains 43 Python and 24 browser-engine tests. The browser remains offline; cache timing is not a ranking-quality or production latency claim.
